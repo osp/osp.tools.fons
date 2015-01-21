@@ -3,80 +3,80 @@ FONS
 A tool to make fonts out of bitmap images.
 
 Process
--------
+=======
 
-### Image
+## Image
 
-#### Get a bitmap image of characters (crop unnecessary white parts for a faster process, you can use Gimp's automatic crop for that).
+### Get a bitmap image of characters (crop unnecessary white parts for a faster process, you can use Gimp's automatic crop for that).
 
-![](input/scan_bitmap.jpg)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=input/scan_bitmap.jpg)
 :    A scan in bitmap
 
-![](input/scan_gray_1200dpi.jpg)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=input/scan_gray_1200dpi.jpg)
 :    A scan in gray levels
 
-![](input/rasterized_ospDIN.png)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=input/rasterized_ospDIN.png)
 :    A rasterized font
 
 
 
 
 
-#### Levels (have a white background, black characters but still shades of gray)
+### Levels (have a white background, black characters but still shades of gray)
 
-![](documentation/01-bitmap_levels.png)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=documentation/01-bitmap_levels.png)
 
 
 
-#### Small boost 
+### Small boost 
 
 Scale up the image to something like 254% with the "Sinc (Lanczos 3)" algorithm. We choose on purpose a non-round number of scaling to break the bitmap patterns.
 
-![](documentation/02-scale-254percent.png)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=documentation/02-scale-254percent.png)
 
 
 
-#### Sharpen
+### Sharpen
 
 Put the amount to the maximum and then search for the point where you don't see 
 
-![](documentation/03-sharpen-too_few.png)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=documentation/03-sharpen-too_few.png)
 :    Radius too small
 
-![](documentation/03-sharpen-ok.png)
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=documentation/03-sharpen-ok.png)
 
-![](documentation/03-sharpen-too_much.png)
-
-
-
-#### Big boost
-
-
-#### Split with G'MIC "extract objects" as layers
-
-#### Export layers as .png
+![](http://git.constantvzw.org/?p=osp.tools.fons.git;a=blob_plain;f=documentation/03-sharpen-too_much.png)
 
 
 
+### Big boost
 
-### Web split tool
 
-#### Adjust the overall baseline and letter by letter when needed
+### Split with G'MIC "extract objects" as layers
 
-#### Name each glyph/png with a text field
+### Export layers as .png
 
 
 
 
+## Web split tool
 
-### Fontforge
+### Adjust the overall baseline and letter by letter when needed
 
-#### Import each .png into Fontforge
+### Name each glyph/png with a text field
 
-#### Autotrace each glyph (arguments dans Fichier/Paramètres)
 
-#### Rescale all glyphs according to higher letter + adjust y offset accordingly
 
-#### Auto-width all glyphs (in the unicode view, not in glyph view)
+
+
+## Fontforge
+
+### Import each .png into Fontforge
+
+### Autotrace each glyph (arguments dans Fichier/Paramètres)
+
+### Rescale all glyphs according to higher letter + adjust y offset accordingly
+
+### Auto-width all glyphs (in the unicode view, not in glyph view)
 
 
