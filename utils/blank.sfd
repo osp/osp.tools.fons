@@ -1,0 +1,51 @@
+SplineFontDB: 3.0
+FontName: Umetra-P_Mincho-stroke
+FullName: Umetra-P_Mincho-stroke
+FamilyName: Umetra-P_Mincho-stroke
+Weight: Medium
+Copyright: Created by Christoph Haag for Open Source Publishing during a wonderful residency at Constant Variable. Made with Bash, Inkscape, Python, FontForge.
+UComments: "2011-2-4: Created." 
+Version: 001.000
+ItalicAngle: 0
+UnderlinePosition: -51
+UnderlineWidth: 25
+Ascent: 350
+Descent: 160
+LayerCount: 2
+Layer: 0 0 "Back"  1
+Layer: 1 0 "Fore"  0
+XUID: [1021 749 1382749337 15312677]
+OS2Version: 0
+OS2_WeightWidthSlopeOnly: 0
+OS2_UseTypoMetrics: 1
+CreationTime: 1296832076
+ModificationTime: 1398204750
+OS2TypoAscent: 0
+OS2TypoAOffset: 1
+OS2TypoDescent: 0
+OS2TypoDOffset: 1
+OS2TypoLinegap: 0
+OS2WinAscent: 0
+OS2WinAOffset: 1
+OS2WinDescent: 0
+OS2WinDOffset: 1
+HheadAscent: 0
+HheadAOffset: 1
+HheadDescent: 0
+HheadDOffset: 1
+OS2Vendor: 'PfEd'
+MarkAttachClasses: 1
+DEI: 91125
+Encoding: ISO8859-1
+UnicodeInterp: none
+NameList: Adobe Glyph List
+DisplaySize: -24
+AntiAlias: 1
+FitToEm: 1
+WinInfo: 0 28 13
+OnlyBitmaps: 1
+BeginPrivate: 0
+EndPrivate
+BeginChars: 256 0
+EndChars
+EndSplineFont
