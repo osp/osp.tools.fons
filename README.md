@@ -60,18 +60,18 @@ http://osp.kitchen/api/osp.tools.fons/raw/documentation/02-scale-254percent.png)
 
 
 
-#### Sharpen
+#### Sharpen with "Unsharp mask"
 
 Put the amount to the maximum and then search for the point where you don't see 
 
-![](
+![bad](
 http://osp.kitchen/api/osp.tools.fons/raw/documentation/03-sharpen-too_few.png)
 :    Radius too small
 
-![](
+![ok](
 http://osp.kitchen/api/osp.tools.fons/raw/documentation/03-sharpen-ok.png)
 
-![](
+![bad](
 http://osp.kitchen/api/osp.tools.fons/raw/documentation/03-sharpen-too_much.png)
 
 
@@ -85,14 +85,25 @@ http://osp.kitchen/api/osp.tools.fons/raw/documentation/04-big_boost.png)
 
 
 
+#### Threshold
 
-#### Split with G'MIC "extract objects" as layers
 
-Use the "Extract Objects" filter in G'MIC plugin in Gimp. You can play with the "Color tolerance" slider to adjust the plitting of letters.
-Use "New image" as output so that it leaves your original image clean.
+![bad](
+http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-threshold-bad.png)
+
+
+![ok](
+http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-threshold-ok.png)
+
+
+#### Split letters as layers
+
+* Use the "Extract Objects" filter in G'MIC plugin in Gimp. You can play with the "Color tolerance" slider to adjust the plitting of letters.
+* Choose the "Located crop" as output so that letters are at the same scale and on the same baseline.
+* Use "New image" in Input/Output (on the left side) so that it leaves your original image clean.
 
 ![](
-http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-gmic_extractObjects.png)
+http://osp.kitchen/api/osp.tools.fons/raw/documentation/06-gmic_extractObjects.png)
 
 
 
@@ -107,8 +118,11 @@ To export each layer into a .png file, run this script into the Filters/Python-f
 
 	def save_all_layers(image, directory, name_pattern):
 	    for layer in image.layers:
+	        # Resizes layer to canvas size
+	        pdb.gimp_layer_resize_to_image_size(layer)
 	        try:
-	            layer.remove_mask(0)
+	            # Tries to remove the alpha channel but it raises an execution error, is it only on my machine?
+	            pdb.gimp_layer_remove_mask(layer, 0)
 	        except: 
 	            pass
 	        filename = directory + (name_pattern % layer.name)
@@ -125,25 +139,64 @@ To export each layer into a .png file, run this script into the Filters/Python-f
 	save_all_layers(img, "/path/to/save/directory/", "%s.png")
 
 
+We need to remove the alpha channel from the png files. We could have done this in Gimp, but the command `pdb.gimp_layer_remove_mask(layer, 0)` does not seem to work. So let's do this with ImageMagick.
+
+	for FILE in /path/to/save/directory/*.png; do convert $FILE -flatten $FILE; done
+	
+	
+
 
 ### Web split tool
 
 #### Adjust the overall baseline and letter by letter when needed
 
-#### Name each glyph/png with a text field
+#### Name each glyph/png which you want to export with a text field
 
+The name of the glyphs have to be then translated into Unicode codes.
 
 
 
 
 ### Fontforge
 
-#### Import each .png into Fontforge
+Here's the description of what the script png2sfd.py does and how you could do it with the GUI of Fontforge.
 
-#### Autotrace each glyph (arguments dans Fichier/Paramètres)
+Usage:
+
+	python png2sfd.py myFontName
+	
+	
+#### Import each .png into Fontforge and autotrace it
+
+	
+Note: Background images are not saved in .ufo files. We have to work with .sfd file for now.
+
+
+
+#### Autotrace each glyph 
+
+(In the Graphical User Interface, Autotrace arguments can be changed in FileParameters or by holding Shift when selecting the Autotrace in the Element menu.)
+
+
 
 #### Rescale all glyphs according to higher letter + adjust y offset accordingly
 
-#### Auto-width all glyphs (in the unicode view, not in glyph view)
 
+
+#### Auto-width all glyphs 
+
+(Accessible in the GUI in the unicode view, not in glyph view)
+
+
+
+
+
+Troubleshooting
+----------------------
+
+### In Fontforge
+
+#### I see a black filled rectangle in a glyph.
+
+It means your .png file has not been flattened and Autotrace cannot trace it.
 
