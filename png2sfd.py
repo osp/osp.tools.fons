@@ -3,7 +3,7 @@
 
 import glob
 import sys
-import fontforge
+import fontforge, psMat
 #from xml.dom.minidom import parse as parseXml
 
 # svg2ufo v0.4
@@ -35,6 +35,44 @@ files = glob.glob("%s/*.png" % LETTERS_DIR)
 #original = fontforge.open(BASE_FONT)
 font = fontforge.open(BLANK_FONT)
 
+
+#def get_alt(code, name):
+    #instances = 8
+    #alt = ()
+    #char = unichr(code)
+    #if char.islower():
+        #instances = 32
+    #elif char.isupper():
+        #instances = 16
+    #for i in range(1,instances):
+        #alt = alt + ("%s.%d" %(name, i),)
+    #return alt
+
+def autokern(font):
+    print "Auto kerning..."
+    font.addLookup(
+        "Kern lookup",
+        "gpos_pair",
+        (),
+        (
+            ('kern',
+                (
+                    ('DFLT', ('dflt',)),
+                    ('latn', ('dflt',))
+                )
+            ),
+        ))
+    font.addLookupSubtable("Kern lookup", "Kern subtable")
+    list1 = ["A", "V", "a", "v", "W", "w", "o", "O", "T", "L", "Y", "l", "y", "r", "e"]
+    list2 = [ ]
+    #for a in list1:
+        #list2.append(a)
+        #alt = get_alt(font.createMappedChar(a).unicode, a)
+        #for b in alt:
+            #list2.append(b)
+    list1 = list2
+    font.autoKern("Kern subtable", 150, list1, list2, onlyCloser=True)
+
 def importGlyph(f, letter, char): 
 
     # make new glyph
@@ -48,6 +86,8 @@ def importGlyph(f, letter, char):
     # Set bearings to 0
     font[char].left_side_bearing = 0
     font[char].right_side_bearing = 0
+    # AutoWidth: separation, MinBearing, MaxBearing
+
 
 for f in files:
         letter = f.split("/")[-1].replace(".png", "")
@@ -61,7 +101,30 @@ for f in files:
         importGlyph(f, letter, int(char))
 
 
+bottom = font["h"].boundingBox()[1]
+top = font["h"].boundingBox()[3]
+
+height = top - bottom
+scale_ratio = 780 / height
+scale_matrix = psMat.scale(scale_ratio)
+translate_matrix = psMat.translate(0, font.descent * scale_ratio)
+matrix = psMat.compose(scale_matrix, translate_matrix)
+print matrix
+
+# Series of transformations on all glyphs
+font.selection.all()
+font.transform(matrix)
+font.autoWidth(100, 30) 
+font.autoHint()
+
+autokern(font)
+
+
+font.descent = 216
+font.ascent = 780
+
 # create the output ufo file
 font.save("%s.sfd" % FONT_NAME)
 font.generate("%s.ufo" % FONT_NAME)
+
 
