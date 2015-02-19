@@ -203,7 +203,7 @@ ascent = 1638
 descent= total_height - ascent
 height_ratio = 0.9
 highest_y_coordinate = height_ratio * ascent
-potrace_pixel_multiplier = 10
+autotrace_pixel_multiplier = 10
 rbearing = 150
 
 class LetterBox(object):
@@ -220,8 +220,8 @@ class GlyphInfo(object):
         self.codepoint = codepoint
         self.box = None
 
-def i_haz_potrace():
-    p = subprocess.Popen('potrace -h', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+def i_haz_autotrace():
+    p = subprocess.Popen('autotrace -h', shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     p.wait()
     return p.returncode == 0
 
@@ -255,9 +255,10 @@ def parse_postscript(commands):
     assert(len(points) == 0)
     return point_sets
 
-def potrace_image(filename):
+def autotrace_image(filename):
     p = subprocess.Popen('potrace -c --eps -q ' + filename + ' -o -', shell=True, stdout=subprocess.PIPE)
     (so, se) = p.communicate()
+    print so, se
     lines = so.split('\n')
     while not lines[0].endswith('moveto'):
         lines.pop(0)
@@ -274,7 +275,7 @@ def crop_and_trace(image, box):
     cropped = image.copy(box)
     if not cropped.save(tempname):
         raise RuntimeError('Could not save cropped image')
-    points = potrace_image(tempname)
+    points = autotrace_image(tempname)
     os.unlink(tempname)
     return points
     
@@ -330,11 +331,12 @@ def pointlist_to_str(points, scale):
 def process_glyph(ofile, image, glyph, scale):
     if glyph.box is None:
         return
-    width = glyph.box.r.width()*potrace_pixel_multiplier*scale + rbearing
+    width = glyph.box.r.width()*autotrace_pixel_multiplier*scale + rbearing
     location3 = 0
     ofile.write(letter_header % (glyph.name, glyph.codepoint, glyph.codepoint, location3, width))
     points = crop_and_trace(image, glyph.box.r)
     for curve in points:
+        print curve
         fp = curve[0]
         assert(len(fp) == 2)
         ofile.write(pointlist_to_str(fp, scale))
@@ -367,10 +369,10 @@ def max_y(glyphs):
     return reduce(lambda x, y: max(x, y.box.r.height()), glyphs, 0)
 
 def calculate_scale(glyphs):
-    """Calculate multiplier to convert potrace's coordinates
+    """Calculate multiplier to convert autotrace's coordinates
     to font coordinates."""
     highest_box = max_y(glyphs)
-    return highest_y_coordinate/(potrace_pixel_multiplier*highest_box)
+    return highest_y_coordinate/(autotrace_pixel_multiplier*highest_box)
 
 def write_sfd(ofilename, fontname, image, glyphs):
     ofile = file(ofilename, 'w')

@@ -1,0 +1,120 @@
+SplineFontDB: 3.0
+FontName: XXXX
+FullName: YYYY
+FamilyName: ZZZZ
+Weight: Medium
+Copyright: Created by Christoph Haag for Open Source Publishing during a wonderful residency at Constant Variable. Made with Bash, Inkscape, Python, FontForge.
+UComments: "2011-2-4: Created."
+Version: 001.000
+ItalicAngle: 0
+UnderlinePosition: -51
+UnderlineWidth: 25
+Ascent: 3520
+Descent: 576
+InvalidEm: 0
+LayerCount: 2
+Layer: 0 0 "Back" 1
+Layer: 1 0 "Fore" 0
+XUID: [1021 749 1382749337 15312677]
+OS2Version: 0
+OS2_WeightWidthSlopeOnly: 0
+OS2_UseTypoMetrics: 1
+CreationTime: 1296832076
+ModificationTime: 1423578757
+OS2TypoAscent: 0
+OS2TypoAOffset: 1
+OS2TypoDescent: 0
+OS2TypoDOffset: 1
+OS2TypoLinegap: 0
+OS2WinAscent: 0
+OS2WinAOffset: 1
+OS2WinDescent: 0
+OS2WinDOffset: 1
+HheadAscent: 0
+HheadAOffset: 1
+HheadDescent: 0
+HheadDOffset: 1
+OS2CapHeight: 0
+OS2XHeight: 0
+OS2Vendor: 'PfEd'
+MarkAttachClasses: 1
+DEI: 91125
+Encoding: UnicodeFull
+UnicodeInterp: none
+NameList: Adobe Glyph List
+DisplaySize: -24
+AntiAlias: 1
+FitToEm: 1
+WinInfo: 56 28 13
+BeginPrivate: 0
+EndPrivate
+BeginChars: 1114112 4
+
+StartChar: a
+Encoding: 97 97 0
+Width: 4096
+VWidth: 0
+Flags: H
+LayerCount: 2
+Back
+Image: 382 774 0 48 2 0 0 3520 5.29199 5.29199 637
+s8W+LJ:IY"!Ik%K!W`6$IK9BKIK9BKIfBD\!<3(K!<3(Krr<3&rrIQKrrITK!!<6$!Ib%K!Ik%K
+!W`6$IK9BKIfBBM!<3(Krr<'"rrITK!!**"!Ib%K!Ib%K!Ib%K!Ib%K!Ib%K!Ib%K!Ik%K!<E-#
+IK9BKIK9BKIK9BKIK9BKIfBBM!<3(Krr<0%rrIQKrrIQKrrIQKrrIQKrrITK!!**"!Ib%K!Ik%K
+!<E-#IK9BKIfBBK!<3(K!<3(K!<3(K!<3(K!<3(K!<3(K!<3(Krr<3&rrIQKrrITK!!**"!Ik%K
+!s&?%IfBBL!<3(K!<3(Krr<*#rrIQKrrITK!!30#!Ib%K!Ib%K!Ib%K!Ib%K!Ib%K!Ib%K!Ib%K
+!Ik%K"9AH&IfBBK!<3(Krr<'"rrITK!!30#!Ib%K!Ik%K!W`6$IK9BKIfBBM!<3(K!<3(Krr<'"
+rrIQKrrIQKrrIQKrrIQKrrITK!!30#!Ik%K"T\Q'IK9BKIfBBK!<3(Krr<*#rrIQKrrITK!"&`+
+!Ib%K!Ib%K!Ib%K!Ib%K!Ik%K!W`6$IfBBO!<3(K!<3(Krr<'"rrITK!!<6$!Ik%K$3:),IfBBL
+!<3(K!<3(K!<3(K!<3(K!<3(Krr<0%rrITK!!`N(!Ik%K!W`6$IK9BKIK9BKIfBBL!<3(K!<3(K
+rr<'"rrITK!!30#!Ib%K!Ik%K!W`6$IfBBP!<3(Krr<'"rrITK!!**"!Ik%K!<E-#IfBBL!<3(K
+!<3(Krr<-$rrIQKrrITK!!<6$!Ib%K!Ik%K3<9'[IK9BKIfBEIrr<`5
+EndImage
+Fore
+EndChar
+
+StartChar: d
+Encoding: 100 100 1
+Width: 4096
+VWidth: 0
+Flags: H
+LayerCount: 2
+Back
+Image: 347 774 0 44 2 0 0 3520 5.29199 5.29199 327
+s8W+LJ:IY"!F#R(!F#R(!F#R(!F#R(!F,R(VZ?_t>6+[(>Q4[.!<3((!<3((rr=2BrrH=(rrH=(
+rrH=(rrH@(!!NB&!F#R(!F,R(*ru<A>6+[(>6+[(>6+[(>Q4[(!<3((!<3((rr<'"rrH@(!!**"
+!F#R(!F#R(!F#R(!F#R(!F#R(!F,R(!<E-#>Q4[.!<3((!<3((rr<*#rrH=(rrH=(rrH@(!!30#
+!F,R(!<E-#>Q4[)!<3((!<3((!<3((!<3((rr<'"rrH@(!<2uu]`A'5>6+[(>6+[(>6+[(>6+[(
+>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(
+>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6+[(>6"X'
+EndImage
+Fore
+EndChar
+
+StartChar: e
+Encoding: 101 101 2
+Width: 4096
+VWidth: 0
+Flags: H
+LayerCount: 2
+Back
+Image: 368 774 0 46 2 0 0 3520 5.29199 5.29199 16
+s8W+LJ:IY"!HA&=rr2utrrE&u!"/c,
+EndImage
+Fore
+EndChar
+
+StartChar: f
+Encoding: 102 102 3
+Width: 4096
+VWidth: 0
+Flags: H
+LayerCount: 2
+Back
+Image: 287 774 0 36 2 0 0 3520 5.29199 5.29199 20
+s8W+LJ:IY"!?V=A!?_=Arr2utrrE&u!"&]+
+EndImage
+Fore
+EndChar
+EndChars
+EndSplineFont

@@ -1,4 +1,4 @@
-#!/usr/bin/python -tt
+#!/home/svilayphiou/venvs/python2/bin/python -tt
 # -*- coding: utf-8 -*-
 
 #    Glyphtracer
@@ -108,7 +108,7 @@ class SelectionArea(QWidget):
         self.active_box = None
 
         self.selected_brush = QBrush(QColor(0, 0, 0, 127))
-        self.active_brush = QBrush(QColor(255, 0, 0, 127))
+        self.active_brush = QBrush(QColor(255, 255, 0, 127))
 
     def set_zoom(self, value):
         self.zoom = value
@@ -292,7 +292,7 @@ class EditorWindow(QWidget):
         self.grid.addWidget(self.combo, 1, 0, 1, 1)
 
         self.zoomlevel = QSpinBox()
-        self.zoomlevel.setMaximum(5)
+        self.zoomlevel.setMaximum(10)
         self.zoomlevel.setMinimum(1)
         self.zoomlevel.setSingleStep(1)
         self.zoomlevel.setPrefix('Zoom level: ')
@@ -396,7 +396,7 @@ class EditorWindow(QWidget):
         try:
             write_sfd(self.sfd_file, self.font_name, self.area.image, selected)
         except Exception, e:
-            QMessageBox.critical(self, "Error", "Sfd generation failed:\n" + str(e))
+            QMessageBox.critical(self, "Error", "SFD generation failed:\n" + str(e))
             return
             
         QMessageBox.information(self, "Success", "Sfd file successfully generated.")
@@ -404,8 +404,8 @@ class EditorWindow(QWidget):
 def start_program(arguments):
     global start_dialog, app
     app = QApplication(arguments)
-    if not i_haz_potrace():
-        QMessageBox.critical(None, program_name, "Potrace executable not in path, exiting.")
+    if not i_haz_autotrace():
+        QMessageBox.critical(None, program_name, "Autotrace executable not in path, exiting.")
         sys.exit(127)
     if len(arguments) > 1:
         start_dialog = StartDialog(arguments[1])
