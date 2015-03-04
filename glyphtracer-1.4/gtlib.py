@@ -21,11 +21,11 @@
 import os, subprocess, tempfile
 import fontforge, psMat
 
-BLANK_FONT = "/home/svilayphiou/work/osp/osp.tools.fons/utils/blank_unicode.sfd"
+BLANK_FONT = "/home/svilayphiou/work/osp/osp.tools.fons/utils/blank.sfd"
 font = fontforge.open(BLANK_FONT)
 
 program_name = 'Glyphtracer'
-program_version = '1.3'
+program_version = '1.4'
 
 def entry_to_upper(e):
     return (e[0].capitalize(), e[1]-32)
@@ -274,9 +274,8 @@ def pointlist_to_str(points, scale):
     return ' '.join([str(scale*p) for p in points])
 
 def process_glyph(image, glyph, scale):
-    codepoint = glyph.codepoint
     font.createMappedChar(glyph.name)
-    font.createChar(codepoint)
+    font.createChar(glyph.codepoint)
 
     crop_and_trace(image, glyph.box.r, codepoint)
     
@@ -295,7 +294,8 @@ def calculate_scale(glyphs):
     scale_matrix = psMat.scale(scale_ratio)
     print scale_ratio
     print font.descent * scale_ratio
-    translate_matrix = psMat.translate(0, font.descent * scale_ratio)
+    #translate_matrix = psMat.translate(0, font.descent * scale_ratio)
+    translate_matrix = psMat.translate(0, 0)
     matrix = psMat.compose(scale_matrix, translate_matrix)
     return matrix
 

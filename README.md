@@ -96,96 +96,20 @@ http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-threshold-bad.png)
 http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-threshold-ok.png)
 
 
-#### Split letters as layers
-
-* Use the "Extract Objects" filter in G'MIC plugin in Gimp. You can play with the "Color tolerance" slider to adjust the plitting of letters.
-* Choose the "Located crop" as output so that letters are at the same scale and on the same baseline.
-* Use "New image" in Input/Output (on the left side) so that it leaves your original image clean.
-
-![](
-http://osp.kitchen/api/osp.tools.fons/raw/documentation/06-gmic_extractObjects.png)
+Save as a .bmp file.
 
 
+### GlyphTracer
+
+- Launch GlyphTracer and feed in the .bmp image (otherwise it will complain).
+- For each given glyph, click on the letter you want to use.
+- Change the characters subset in the bottom left dropdown menu to select more glyphs.
 
 
 
-#### Export layers as .png
-
-To export each layer into a .png file, run this script into the Filters/Python-fu/Console: 
+IMPORTANT: If you zoom out to select the letters, don't forget to go back to zoom 1 before generating the font file. Don't close GlyphTracer before checking the .sfd file, then you can export again if you forgot to zoom back in.
 
 
-
-
-	def save_all_layers(image, directory, name_pattern):
-	    for layer in image.layers:
-	        # Resizes layer to canvas size
-	        pdb.gimp_layer_resize_to_image_size(layer)
-	        try:
-	            # Tries to remove the alpha channel but it raises an execution error, is it only on my machine?
-	            pdb.gimp_layer_remove_mask(layer, 0)
-	        except: 
-	            pass
-	        filename = directory + (name_pattern % layer.name)
-	        raw_filename = name_pattern % layer.name
-	        pdb.gimp_file_save(image, layer, filename, raw_filename)
-
-	# This lists all opened image in Gimp
-	gimp.image_list()
-	
-	# This should list the latest image opened which is the one we just made. Check with the command before if it correct.
-	img = gimp.image_list()[0]
-	
-	# Change the path to where you want your images to be saved
-	save_all_layers(img, "/path/to/save/directory/", "%s.png")
-
-
-We need to remove the alpha channel from the png files. We could have done this in Gimp, but the command `pdb.gimp_layer_remove_mask(layer, 0)` does not seem to work. So let's do this with ImageMagick.
-
-	for FILE in /path/to/save/directory/*.png; do convert $FILE -flatten $FILE; done
-	
-	
-
-
-### Web split tool
-
-#### Adjust the overall baseline and letter by letter when needed
-
-#### Name each glyph/png which you want to export with a text field
-
-The name of the glyphs have to be then translated into Unicode codes.
-
-
-
-
-### Fontforge
-
-Here's the description of what the script png2sfd.py does and how you could do it with the GUI of Fontforge.
-
-Usage:
-
-	python png2sfd.py myFontName
-	
-	
-#### Import each .png into Fontforge and autotrace it
-
-	
-Note: Background images are not saved in .ufo files. We have to work with .sfd file for now.
-
-
-
-#### Autotrace each glyph 
-
-(In the Graphical User Interface, Autotrace arguments can be changed in FileParameters or by holding Shift when selecting the Autotrace in the Element menu.)
-
-
-
-#### Rescale all glyphs according to higher letter + adjust y offset accordingly
-
-
-
-#### Auto-width all glyphs 
-
-(Accessible in the GUI in the unicode view, not in glyph view)
 
 
 
@@ -194,9 +118,13 @@ Note: Background images are not saved in .ufo files. We have to work with .sfd f
 Troubleshooting
 ----------------------
 
-### In Fontforge
+### My image is too big to manipulate it.
+Split it into several images and generate several .sfd files. Then you can merge the fonts with the script `mergeFonts.py`.
 
-#### I see a black filled rectangle in a glyph.
 
-It means your .png file has not been flattened and Autotrace cannot trace it.
+### I have empty and very small width when I open a glyph in Fontforge.
+You probably generated the .sfd with a zoom level different than 1.
 
+
+### I see several letters in ony glyph.
+You probably generated the .sfd with a zoom level different than 1.
