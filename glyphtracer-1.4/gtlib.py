@@ -2,6 +2,7 @@
 
 #    Glyphtracer
 #    Copyright (C) 2010 Jussi Pakkanen
+#    version 1.4 (c) 2015 Stéphanie Vilayphiou
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -21,7 +22,7 @@
 import os, subprocess, tempfile
 import fontforge, psMat
 
-BLANK_FONT = "/home/svilayphiou/work/osp/osp.tools.fons/utils/blank.sfd"
+BLANK_FONT = "../utils/blank.sfd"
 font = fontforge.open(BLANK_FONT)
 
 program_name = 'Glyphtracer'
@@ -277,7 +278,7 @@ def process_glyph(image, glyph, scale):
     font.createMappedChar(glyph.name)
     font.createChar(glyph.codepoint)
 
-    crop_and_trace(image, glyph.box.r, codepoint)
+    crop_and_trace(image, glyph.box.r, glyph.codepoint)
     
 
 def max_y(glyphs):
@@ -288,15 +289,19 @@ def calculate_scale(glyphs):
     """Calculate multiplier to convert potrace's coordinates
     to font coordinates."""
     highest_box = max_y(glyphs)
-    print highest_box
-    print total_height
-    scale_ratio =   total_height / highest_box
+    print "highest_box: %f" %  highest_box
+    print "total height: %f" % total_height
+    scale_ratio = total_height / highest_box
     scale_matrix = psMat.scale(scale_ratio)
-    print scale_ratio
-    print font.descent * scale_ratio
+    print "scale ratio: %f" % scale_ratio
+    print "font descent * scale ratio: %f" % (font.descent * scale_ratio)
     #translate_matrix = psMat.translate(0, font.descent * scale_ratio)
     translate_matrix = psMat.translate(0, 0)
     matrix = psMat.compose(scale_matrix, translate_matrix)
+
+    
+    bla = highest_y_coordinate/(potrace_pixel_multiplier*highest_box)
+    print "from 1.3: %f" % bla
     return matrix
 
 def write_sfd(ofilename, fontname, image, glyphs):
@@ -304,6 +309,7 @@ def write_sfd(ofilename, fontname, image, glyphs):
     
 
     for glyph in glyphs:
+        print glyph.name, glyph.box.r
         process_glyph(image, glyph, scale)
     
     font.selection.all()
