@@ -14,7 +14,8 @@ Tools needed
 Process
 -------
 
-### Image
+### Preparing the image
+
 
 #### Get a bitmap image of characters (crop unnecessary white parts for a faster process, you can use Gimp's automatic crop for that).
 
@@ -75,7 +76,17 @@ Scale up to 403% (check on notebook or with PierreH if it's enough)
 ![ok](http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-threshold-ok.png)
 
 
-Save as a .bmp file.
+#### Baseline
+
+When importing a bitmap, Fontforge scales up/down the bitmap so that it fits into the glyph box. If we use GlyphTracer 1.4, this ends up with different scales of glyphs. In order to prevent this, we can put a black rectangle of the height of the maximum ascendant and maximum descendant.
+
+![baseline](http://osp.kitchen/api/osp.tools.fons/raw/documentation/06-baseline.png)
+
+
+#### Bitmap
+
+- Change the color mode to Indexed mode with 1 black/white bit.
+- Save as a .bmp file.
 
 
 ### GlyphTracer
