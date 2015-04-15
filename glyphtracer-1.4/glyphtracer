@@ -3,6 +3,7 @@
 
 #    Glyphtracer
 #    Copyright (C) 2010 Jussi Pakkanen
+#    version 1.4 (c) 2015 Stéphanie Vilayphiou
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -389,6 +390,8 @@ class EditorWindow(QWidget):
         return selected
         
     def generate_sfd(self):
+        self.area.set_zoom(1)
+        self.area.repaint()
         selected = self.get_selected_glyphs()
         if len(selected) == 0:
             QMessageBox.critical(self, "Error", "No glyphs selected, can not generate sfd file.\n")
