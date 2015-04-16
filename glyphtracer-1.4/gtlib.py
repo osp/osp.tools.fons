@@ -277,6 +277,7 @@ def pointlist_to_str(points, scale):
 def process_glyph(image, glyph, scale):
     font.createMappedChar(glyph.name)
     font.createChar(glyph.codepoint)
+    font[glyph.name].vwidth = total_height
 
     crop_and_trace(image, glyph.box.r, glyph.codepoint)
     
@@ -305,6 +306,8 @@ def calculate_scale(glyphs):
     return matrix
 
 def write_sfd(ofilename, fontname, image, glyphs):
+    font.ascent = ascent
+    font.descent = descent
     scale = calculate_scale(glyphs)
     
 
@@ -313,7 +316,7 @@ def write_sfd(ofilename, fontname, image, glyphs):
         process_glyph(image, glyph, scale)
     
     font.selection.all()
-    font.transform(scale)
+    #font.transform(scale)
     font.autoWidth(100, 30) 
     font.autoHint()
     font.save(ofilename)
