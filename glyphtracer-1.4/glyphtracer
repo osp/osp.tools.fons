@@ -293,7 +293,7 @@ class EditorWindow(QWidget):
         self.grid.addWidget(self.combo, 1, 0, 1, 1)
 
         self.zoomlevel = QSpinBox()
-        self.zoomlevel.setMaximum(10)
+        self.zoomlevel.setMaximum(30)
         self.zoomlevel.setMinimum(1)
         self.zoomlevel.setSingleStep(1)
         self.zoomlevel.setPrefix('Zoom level: ')
