@@ -25,8 +25,9 @@ Process
 ![](http://osp.kitchen/api/osp.tools.fons/raw/input/scan_gray_1200dpi.jpg)
 :    A scan in gray levels
 
-![](http://osp.kitchen/api/osp.tools.fons/raw/input/rasterized_ospDIN.png)
-:    A rasterized font
+![](http://osp.kitchen/api/osp.tools.fons/raw/input/characters-table.svg)
+:    A rasterized font: to typeset it, you can use the template characters-table.svg in the `/input/` folder
+
 
 
 
@@ -91,23 +92,25 @@ When importing a bitmap, Fontforge scales up/down the bitmap so that it fits int
 
 ### GlyphTracer
 
-- Launch GlyphTracer and feed in the .bmp image (otherwise it will complain).
+- To launch GlyphTracer, there are two possibilities:
+    - from your file manager, double-click on the file `glyphtracer` inside the `glyphtracer-1.4` folder
+    - from the terminal, go to the `glyphtracer-1.4` folder and run `./glyphtracer`. This will let you know more output in case of errors.
+- Feed in the .bmp image in 1 bit (otherwise it will complain).
 - For each given glyph, click on the letter you want to use.
 - Change the characters subset in the bottom left dropdown menu to select more glyphs.
 
 
 
-IMPORTANT: If you zoom out to select the letters, don't forget to go back to zoom 1 before generating the font file. Don't close GlyphTracer before checking the .sfd file, then you can export again if you forgot to zoom back in.
+### Post-production
 
-
-### Merging fonts
+#### Merging fonts
 
 In case you want to complete an existing font, you can use the script `mergeFonts.py`.
 
     python mergeFonts.py fonte1.ufo fonte2.ufo ...  fonte17.ufo fonte-out.ufo
 
 
-### Metrics and kernings
+#### Metrics and kernings
 
 A big part of type design is about managing the white space around the letters (metrics) and exceptions for specific couples of letters (kernings).
 
@@ -127,9 +130,11 @@ Troubleshooting
 Split it into several images and generate several .sfd files. Then you can merge the fonts with the script `mergeFonts.py`.
 
 
-### I have empty and very small width when I open a glyph in Fontforge.
-You probably generated the .sfd with a zoom level different than 1.
+### From the terminal, I have the following error:
 
+  File "./glyphtracer", line 415
+      except Exception, e:
+                          ^
+  SyntaxError: invalid syntax
 
-### I see several letters in ony glyph.
-You probably generated the .sfd with a zoom level different than 1.
+This means your fontforge runs with python3, whereas the majority of installs run still with python2. I didn't find a convenient way yet to maintain both versions at the same time. Let me know and I send you the version for python3 which I use.
