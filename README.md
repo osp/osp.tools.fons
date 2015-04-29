@@ -132,9 +132,9 @@ Split it into several images and generate several .sfd files. Then you can merge
 
 ### From the terminal, I have the following error:
 
-  File "./glyphtracer", line 415
-      except Exception, e:
+    File "./glyphtracer", line 415
+        except Exception, e:
                           ^
-  SyntaxError: invalid syntax
+    SyntaxError: invalid syntax
 
 This means your fontforge runs with python3, whereas the majority of installs run still with python2. I didn't find a convenient way yet to maintain both versions at the same time. Let me know and I send you the version for python3 which I use.
