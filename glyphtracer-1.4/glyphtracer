@@ -172,6 +172,8 @@ class StartDialog(QWidget):
         
         self.grid = QGridLayout()
         self.name_edit = QLineEdit('MyFont')
+        self.font_height_edit = QLineEdit('1000')
+        self.font_ascent_edit = QLineEdit('780')
         self.file_edit = QLineEdit()
         self.output_edit = QLineEdit()
         if initial_file_name is not None:
@@ -182,12 +184,20 @@ class StartDialog(QWidget):
         
         self.grid.setSpacing(10)
         self.grid.addWidget(QLabel('Font name'), 0, 0)
-        self.grid.addWidget(self.name_edit, 0, 1, 1, 2)
-        self.grid.addWidget(QLabel('Image file'), 1, 0)
-        self.grid.addWidget(self.file_edit, 1, 1)
-        self.grid.addWidget(self.file_button, 1, 2)
-        self.grid.addWidget(QLabel('Output file'), 2, 0)
-        self.grid.addWidget(self.output_edit, 2, 1, 1, 2)
+        self.grid.addWidget(self.name_edit, 0, 1, 1, 3)
+        
+        self.grid.addWidget(QLabel('Font height'), 1, 0)
+        self.grid.addWidget(self.font_height_edit, 1, 1)
+        
+        self.grid.addWidget(QLabel('Font ascent'), 1, 2)
+        self.grid.addWidget(self.font_ascent_edit, 1, 3)
+
+        self.grid.addWidget(QLabel('Image file'), 2, 0)
+        self.grid.addWidget(self.file_edit, 2, 1, 1, 2)
+        self.grid.addWidget(self.file_button, 2, 3)
+
+        self.grid.addWidget(QLabel('Output file'), 3, 0)
+        self.grid.addWidget(self.output_edit, 3, 1, 1, 3)
         
         hbox = QHBoxLayout()
         about_button = QPushButton('About')
@@ -201,7 +211,7 @@ class StartDialog(QWidget):
         hbox.addWidget(quit_button)
         w = QWidget()
         w.setLayout(hbox)
-        self.grid.addWidget(w, 3, 0, 1, 3)
+        self.grid.addWidget(w, 4, 0, 1, 3)
         
         self.setLayout(self.grid)
         
@@ -240,6 +250,8 @@ class StartDialog(QWidget):
         fname = self.file_edit.text()
         output = self.output_edit.text()
         font_name = self.name_edit.text()
+        font_height = self.font_height_edit.text()
+        font_ascent = self.font_ascent_edit.text()
         image = QImage(fname)
         if not self.is_image_file_valid(image):
             QMessageBox.critical(self, "Error", "Selected file is not a 1 bit image.")
@@ -252,15 +264,17 @@ class StartDialog(QWidget):
                                        'Overwrite it', 'Select a different file') != 0:
                 return
         start_dialog.hide()
-        main_win = EditorWindow(image, font_name, output)
+        main_win = EditorWindow(image, font_name, font_height, font_ascent, output)
         main_win.show()
 
 class EditorWindow(QWidget):
-    def __init__(self, image, font_name, sfd_file, parent=None):
+    def __init__(self, image, font_name, font_height, font_ascent, sfd_file, parent=None):
         QWidget.__init__(self)
         self.active_glyph = 0
         self.glyphlist = []
         self.font_name = font_name
+        self.font_height = font_height
+        self.font_ascent = font_ascent
         self.sfd_file = sfd_file
 
         self.set_nice_windowsize(image)

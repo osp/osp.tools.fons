@@ -130,6 +130,7 @@ glyph_groups = [('latin lower case', latin_lowercase_list),\
                 ('latin upper case', latin_uppercase_list),\
                 ('latin accented lower case', latin_accented_lower_list),\
                 ('latin accented upper case', latin_accented_upper_list),\
+                ('latin diacritics', latin_diacritics_list),\
                 ('latin extra lower case', latin_extra_lower_list),
                 ('latin extra upper case', latin_extra_upper_list),
                 ('numbers', number_list),\
@@ -142,16 +143,6 @@ glyph_groups = [('latin lower case', latin_lowercase_list),\
                 ('cyrillic uppercase', cyrillic_upper)]
 
 
-# Numerical constants
-#total_height = 2048 # By convention on Opentype Fonts
-total_height = 1000.
-#ascent = 1638
-ascent = 780.
-descent= total_height - ascent
-height_ratio = 0.9
-highest_y_coordinate = height_ratio * ascent
-potrace_pixel_multiplier = 100
-rbearing = 150
 
 class LetterBox(object):
     def __init__(self, rectangle):
@@ -203,20 +194,9 @@ def parse_postscript(commands):
     return point_sets
 
 def potrace_image(filename):
-    #p = subprocess.Popen('potrace -c --eps -q ' + filename + ' -o -', shell=True, stdout=subprocess.PIPE)
-    #p = subprocess.Popen('autotrace ' + filename, shell=True, stdout=subprocess.PIPE)
-
     svg = filename + ".svg"
     p = subprocess.Popen('autotrace -output-file=' + svg + ' ' + filename, shell=True, stdout=subprocess.PIPE)
     (so, se) = p.communicate()
-    #lines = so.split('\n')
-    #while not lines[0].endswith('moveto'):
-        #lines.pop(0)
-    #while not lines[-1].endswith('closepath'):
-        #lines.pop()
-    #pointset = parse_postscript(lines)
-    #pointset = map(convert_points, pointset)
-    #return pointset
     return svg
 
 def crop_and_trace(image, box, codepoint):
@@ -281,10 +261,10 @@ def flip_curve(curve):
 def pointlist_to_str(points, scale):
     return ' '.join([str(scale*p) for p in points])
 
-def process_glyph(image, glyph, scale):
+def process_glyph(image, glyph, font_height):
     font.createMappedChar(glyph.name)
     font.createChar(glyph.codepoint)
-    font[glyph.name].vwidth = total_height
+    font[glyph.name].vwidth = font_height
 
     crop_and_trace(image, glyph.box.r, glyph.codepoint)
     
@@ -293,62 +273,39 @@ def max_y(glyphs):
     """Return the the height of the tallest letter box."""
     return reduce(lambda x, y: max(x, y.box.r.height()), glyphs, 0)
 
-def calculate_scale(glyphs):
-    """Calculate multiplier to convert potrace's coordinates
-    to font coordinates."""
-    highest_box = max_y(glyphs)
-    print "highest_box: %f" %  highest_box
-    print "total height: %f" % total_height
-    scale_ratio = total_height / highest_box
-    scale_matrix = psMat.scale(scale_ratio)
-    print "scale ratio: %f" % scale_ratio
-    print "font descent * scale ratio: %f" % (font.descent * scale_ratio)
-    #translate_matrix = psMat.translate(0, font.descent * scale_ratio)
-    translate_matrix = psMat.translate(0, 0)
-    matrix = psMat.compose(scale_matrix, translate_matrix)
-
-    
-    bla = highest_y_coordinate/(potrace_pixel_multiplier*highest_box)
-    print "from 1.3: %f" % bla
-    return matrix
-
 def createSpaceGlyphs(name, codepoint, value):
     font.createMappedChar(name)
     font.createChar(codepoint)
     font[name].width = value;
 
-def write_sfd(ofilename, fontname, image, glyphs):
-    font.ascent = ascent
-    font.descent = descent
-    scale = calculate_scale(glyphs)
-    
+def write_sfd(ofilename, fontname, image, glyphs, font_height, font_ascent):
+    font.ascent = font_ascent
+    font.descent = font_height - font_ascent
 
     for glyph in glyphs:
         print glyph.name, glyph.box.r
-        process_glyph(image, glyph, scale)
+        process_glyph(image, glyph, font_height)
     
-
     font.selection.all()
-    #font.transform(scale)
     font.autoWidth(100, 30) 
     font.autoHint()
 
     # CREATE SPACE CHARACTERS
-    createSpaceGlyphs('space', 32, total_height / 4)
-    createSpaceGlyphs('uni2000', 8192, total_height / 2) # en-quad
-    createSpaceGlyphs('uni2001', 8193, total_height) # em-quad
-    createSpaceGlyphs('uni2002', 8194, total_height / 2) # en-space
-    createSpaceGlyphs('uni2003', 8195, total_height) # em-space
-    createSpaceGlyphs('uni2004', 8196, total_height / 3) # three per em space
-    createSpaceGlyphs('uni2005', 8197, total_height / 4) # four per em space
-    createSpaceGlyphs('uni2006', 8198, total_height / 6) # six per em space
+    createSpaceGlyphs('space', 32, font_height / 4)
+    createSpaceGlyphs('uni2000', 8192, font_height / 2) # en-quad
+    createSpaceGlyphs('uni2001', 8193, font_height) # em-quad
+    createSpaceGlyphs('uni2002', 8194, font_height / 2) # en-space
+    createSpaceGlyphs('uni2003', 8195, font_height) # em-space
+    createSpaceGlyphs('uni2004', 8196, font_height / 3) # three per em space
+    createSpaceGlyphs('uni2005', 8197, font_height / 4) # four per em space
+    createSpaceGlyphs('uni2006', 8198, font_height / 6) # six per em space
     #createSpaceGlyphs('uni2007', 8199, font['five'].width) # figure space
     #createSpaceGlyphs('uni2008', 8200, font['period'].width) # punctuation space
-    createSpaceGlyphs('uni2009', 8201, total_height / 5) # thin space
-    createSpaceGlyphs('uni200A', 8202, total_height / 6) # hair space
+    createSpaceGlyphs('uni2009', 8201, font_height / 5) # thin space
+    createSpaceGlyphs('uni200A', 8202, font_height / 6) # hair space
     createSpaceGlyphs('uni200B', 8203, 0) # zero-width space
-    createSpaceGlyphs('uni202F', 8239, total_height / 5) # narrow no-break space
-    createSpaceGlyphs('uni205F', 8287, total_height / 18 * 4) # mathematical space
+    createSpaceGlyphs('uni202F', 8239, font_height / 5) # narrow no-break space
+    createSpaceGlyphs('uni205F', 8287, font_height / 18 * 4) # mathematical space
     createSpaceGlyphs('uniFEFF', 65279, 0) # zero width no-break space
 
     font.save(ofilename)
