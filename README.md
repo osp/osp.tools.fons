@@ -99,6 +99,7 @@ When importing a bitmap, Fontforge scales up/down the bitmap so that it fits int
 - For each given glyph, click on the letter you want to use.
 - Change the characters subset in the bottom left dropdown menu to select more glyphs.
 
+![glyphtracer](http://osp.kitchen/api/osp.tools.fons/raw/iceberg/glyphtracer.png)
 
 
 ### Post-production
