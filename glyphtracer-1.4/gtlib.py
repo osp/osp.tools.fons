@@ -64,6 +64,9 @@ latin_accented_lower_list = [('agrave', 224), ('aacute', 225), ('acircumflex', 2
 latin_accented_upper_list = [entry_to_upper(x) for x in latin_accented_lower_list[:-1]] \
 + [('Ydieresis', 376)]
 
+latin_diacritics_list = [('asciicircum', 94), ('grave', 96), ('dieresis', 168), ('macron', 175), \
+                         ('acute', 180), ('cedilla', 184)]
+
 latin_extra_lower_list = [('ccedilla', 231), ('eth', 240), ('oslash', 248),\
                           ('thorn', 254), ('ae', 230), ('oe', 339), ('germandbls', 223)]
 
