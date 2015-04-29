@@ -74,12 +74,15 @@ latin_extra_upper_list = [entry_to_upper(x) for x in latin_extra_lower_list[:-3]
 + [('AE', 198), ('OE', 338)]
 
 number_list = [('zero', 48), ('one', 49), ('two', 50), ('three', 51), ('four', 52), ('five', 53),\
-               ('six', 54), ('seven', 55), ('eight', 56), ('nine', 57)]
+               ('six', 54), ('seven', 55), ('eight', 56), ('nine', 57), ('onequarter', 188), ('onehalf', 189), ('threequarters', 190),\
+               ('uni2160', 8544), ('uni2161', 8545),\
+               ('uni2162', 8546), ('uni2163', 8547), ('uni2164', 8548), ('uni2165', 8549), ('uni2166', 8550), ('uni2167', 8551),\
+               ('uni2168', 8552), ('uni2169', 8553), ('uni216A', 8554), ('uni216B', 8555), ('uni216C', 8556), ('uni216D', 8557), ('uni216E', 8558), ('uni216F', 8559)]
 
 punctuation_list = [('exclam', 33), ('exclamdown', 161), ('question', 63), ('questiondown', 191),\
                     ('period', 46), ('comma', 44), ('colon', 58), ('semicolon', 59),\
                     ('slash', 47), ('backslash', 92), ('hyphen', 45), ('underscore', 95),\
-                    ('endash', 8211), ('emdash', 8212), ('ellipsis', 8230), ('periodcenter', 183)]
+                    ('endash', 8211), ('emdash', 8212), ('ellipsis', 8230), ('periodcentered', 183)]
 
 brackets_list = [('parenleft', 40), ('parenright', 41), ('bracketleft', 91), ('bracketright', 93),\
                  ('braceleft', 123), ('braceright', 125), ('less', 60), ('greater', 62)]
@@ -92,8 +95,9 @@ quotation_list = [('quotesingle', 39,), ('quotedbl', 34), ('quoteleft', 8216), (
 symbol_list = [('numbersign', 35), ('percent', 37), ('ampersand', 38), ('asterisk', 42),\
                ('plus', 43), ('multiply', 215), ('divide', 247), ('equal', 61), ('at', 64),\
                ('asciitilde', 126), ('copyright', 169), ('registered', 174),\
-               ('trademark', 8482), ('paragraph', 182), ('section', 167), ('brokenbar', 166),\
-               ('uniFFFD', 65533)]
+               ('trademark', 8482), ('paragraph', 182), ('section', 167), ('bar', 124), ('brokenbar', 166),\
+               ('uniFFFD', 65533), ('ordfeminine', 170), ('logicalnot', 172), ('degree', 176),\
+               ('plusminus', 177), ('uni00B2', 178), ('uni00B3', 179), ('mu', 181), ('uni00B9', 185), ('uni00BA', 186)]
 
 currency_list = [('dollar', 36), ('cent', 162), ('euro', 8364), ('sterling', 163),\
                  ('yen', 165), ('currency', 164)]
@@ -308,6 +312,11 @@ def calculate_scale(glyphs):
     print "from 1.3: %f" % bla
     return matrix
 
+def createSpaceGlyphs(name, codepoint, value):
+    font.createMappedChar(name)
+    font.createChar(codepoint)
+    font[name].width = value;
+
 def write_sfd(ofilename, fontname, image, glyphs):
     font.ascent = ascent
     font.descent = descent
@@ -318,8 +327,28 @@ def write_sfd(ofilename, fontname, image, glyphs):
         print glyph.name, glyph.box.r
         process_glyph(image, glyph, scale)
     
+
     font.selection.all()
     #font.transform(scale)
     font.autoWidth(100, 30) 
     font.autoHint()
+
+    # CREATE SPACE CHARACTERS
+    createSpaceGlyphs('space', 32, total_height / 4)
+    createSpaceGlyphs('uni2000', 8192, total_height / 2) # en-quad
+    createSpaceGlyphs('uni2001', 8193, total_height) # em-quad
+    createSpaceGlyphs('uni2002', 8194, total_height / 2) # en-space
+    createSpaceGlyphs('uni2003', 8195, total_height) # em-space
+    createSpaceGlyphs('uni2004', 8196, total_height / 3) # three per em space
+    createSpaceGlyphs('uni2005', 8197, total_height / 4) # four per em space
+    createSpaceGlyphs('uni2006', 8198, total_height / 6) # six per em space
+    #createSpaceGlyphs('uni2007', 8199, font['five'].width) # figure space
+    #createSpaceGlyphs('uni2008', 8200, font['period'].width) # punctuation space
+    createSpaceGlyphs('uni2009', 8201, total_height / 5) # thin space
+    createSpaceGlyphs('uni200A', 8202, total_height / 6) # hair space
+    createSpaceGlyphs('uni200B', 8203, 0) # zero-width space
+    createSpaceGlyphs('uni202F', 8239, total_height / 5) # narrow no-break space
+    createSpaceGlyphs('uni205F', 8287, total_height / 18 * 4) # mathematical space
+    createSpaceGlyphs('uniFEFF', 65279, 0) # zero width no-break space
+
     font.save(ofilename)
