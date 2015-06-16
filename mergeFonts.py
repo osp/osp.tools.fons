@@ -16,14 +16,14 @@ import sys
 font1 = fontforge.open(sys.argv[1])
 font2 = sys.argv[2]
 args = len(sys.argv) - 1
-print args
+print(args)
 
 
 i = 0
 for arg in sys.argv:
-    print i
+    print(i)
     if i > 1 and i < args:
-        print arg
+        print(arg)
         font1.mergeFonts(arg)
     i += 1
         
