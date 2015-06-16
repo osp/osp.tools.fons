@@ -56,17 +56,17 @@ Preparing the image
 ### Get a bitmap image of characters (crop unnecessary white parts for a faster process, you can use Gimp's automatic crop for that).
 
 <div>
-    <figure style="float: left; margin: 0.5em; width 30%;">
+    <figure style="float: left; margin: 0.5em; width: 30%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/scan_bitmap.jpg" />
         <footer>A scan in bitmap</footer>
     </figure>
 
-    <figure style="float: left; margin: 0.5em; width 30%;">
+    <figure style="float: left; margin: 0.5em; width: 30%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/scan_gray_1200dpi.jpg" />
         <footer>A scan in gray levels</footer>
     </figure>
 
-    <figure style="float: left; margin: 0.5em; width 30%;">
+    <figure style="float: left; margin: 0.5em; width: 30%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/characters-table.png" />
         <footer>A rasterized font: to typeset it, you can use the template `characters-table.svg` in the `/input/` folder</footer>
     </figure>
@@ -94,17 +94,17 @@ Scale up the image to something like 254% with the "Sinc (Lanczos 3)" algorithm.
 Put the amount to the maximum and then search for the point where you don't see 
 
 <div>
-    <figure style="float: left; margin: 0.5em; width 30%;">
+    <figure style="float: left; margin: 0.5em; width: 30%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/documentation/03-sharpen-too_few.png" />
         <footer>Radius too small</footer>
     </figure>
 
-    <figure style="float: left; margin: 0.5em; width 30%;">
+    <figure style="float: left; margin: 0.5em; width: 30%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/documentation/03-sharpen-ok.png" />
         <footer>OK</footer>
     </figure>
 
-    <figure style="float: left; margin: 0.5em; width 30%;">
+    <figure style="float: left; margin: 0.5em; width: 30%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/documentation/03-sharpen-too_much.png" />
             <footer>Radius too big</footer>
     </figure>
@@ -125,11 +125,11 @@ Scale up to 403%.
 
 
 <div>
-    <figure style="float: left; margin: 0.5em; width 45%;">
+    <figure style="float: left; margin: 0.5em; width: 45%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/documentation/06-threshold-bad.png" />
         <footer>Bad</footer>
     </figure>
-    <figure style="float: left; margin: 0.5em; width 45%;">
+    <figure style="float: left; margin: 0.5em; width: 45%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/documentation/05-threshold-ok.png" />
         <footer>OK</footer>
     </figure>
@@ -171,6 +171,7 @@ Vectorizing with GlyphTracer
 
 
 
+g src="http://osp.kitchen/api/osp.tools.fons/raw/input/scan_bitmap.jpg" style="width: 100%;">
 
 
 Post-production
