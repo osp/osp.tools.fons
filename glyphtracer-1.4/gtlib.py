@@ -99,7 +99,7 @@ symbol_list = [('numbersign', 35), ('percent', 37), ('ampersand', 38), ('asteris
                ('uniFFFD', 65533), ('ordfeminine', 170), ('logicalnot', 172), ('degree', 176),\
                ('plusminus', 177), ('uni00B2', 178), ('uni00B3', 179), ('mu', 181), ('uni00B9', 185), ('uni00BA', 186)]
 
-currency_list = [('dollar', 36), ('cent', 162), ('euro', 8364), ('sterling', 163),\
+currency_list = [('dollar', 36), ('cent', 162), ('Euro', 8364), ('sterling', 163),\
                  ('yen', 165), ('currency', 164)]
 
 cyrillic_upper = [('afii10017', 1040), ('afii10018', 1041), ('afii10019', 1042),\
