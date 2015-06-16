@@ -68,7 +68,7 @@ Preparing the image
     <span style="clear: both;"></span>
 </div>
 
-<figure style="float: left; margin: 0.5em; width: 100%;">
+<figure>
     <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/characters-table.png" />
     <footer>A rasterized font: to typeset it, you can use the template `characters-table.svg` in the `/input/` folder</footer>
 </figure>
