@@ -56,22 +56,22 @@ Preparing the image
 ### Get a bitmap image of characters (crop unnecessary white parts for a faster process, you can use Gimp's automatic crop for that).
 
 <div>
-    <figure style="float: left; margin: 0.5em; width: 30%;">
+    <figure style="float: left; margin: 0.5em; width: 45%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/scan_bitmap.jpg" />
         <footer>A scan in bitmap</footer>
     </figure>
 
-    <figure style="float: left; margin: 0.5em; width: 30%;">
+    <figure style="float: left; margin: 0.5em; width: 45%;">
         <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/scan_gray_1200dpi.jpg" />
         <footer>A scan in gray levels</footer>
     </figure>
     <span style="clear: both;"></span>
 </div>
 
-    <figure style="float: left; margin: 0.5em; width: 30%;">
-        <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/characters-table.png" />
-        <footer>A rasterized font: to typeset it, you can use the template `characters-table.svg` in the `/input/` folder</footer>
-    </figure>
+<figure style="float: left; margin: 0.5em; width: 100%;">
+    <img src="http://osp.kitchen/api/osp.tools.fons/raw/input/characters-table.png" />
+    <footer>A rasterized font: to typeset it, you can use the template `characters-table.svg` in the `/input/` folder</footer>
+</figure>
 
 
 
