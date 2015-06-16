@@ -231,7 +231,7 @@ class StartDialog(QWidget):
     def about_message(self):
         QMessageBox.information(self, "About " + program_name, 
                                 program_name + ' ' + program_version + \
-                                "\n(C) 2010 Jussi Pakkanen.\nThis program is available under the Gnu General Public License v3 or later.")
+                                "\n(C) 2010 Jussi Pakkanen, and (c) 2015 Stéphanie Vilayphiou.\nThis program is available under the Gnu General Public License v3 or later.")
     
     def does_file_exist(self, fname):
         try:
