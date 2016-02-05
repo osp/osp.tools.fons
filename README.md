@@ -44,6 +44,7 @@ Tools needed
 ------------
 - Gimp
 - Autotrace
+- python-fontforge
 - Fontforge with Autotrace
 - GlyphTracer (included with this package)
 
