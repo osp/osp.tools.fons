@@ -188,7 +188,7 @@ In case you want to complete an existing font, you can use the script `mergeFont
 A big part of type design is about managing the white space around the letters (metrics) and exceptions for specific couples of letters (kernings).
 
 - For the metrics, we make an auto-spacing while generating the .sfd file with GlyphTracer.
-- For the kernings, you can try the tool (Kernagic)[https://github.com/hodefoting/kernagic].
+- For the kernings, you can try the tool [Kernagic](https://github.com/hodefoting/kernagic).
 
 But if you want to get back metric and kerning data from an existing font, you can use the script `mergeSpacing.py`. It can be any font format than `.otf`.
 
