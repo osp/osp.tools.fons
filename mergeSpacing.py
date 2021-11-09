@@ -19,22 +19,26 @@ original = fontforge.open(sys.argv[2])
 
 # MERGE SPACINGS
 for g in font.glyphs():
-    char = g.glyphname
-    # Gets original font bearings
-    left = original[char].left_side_bearing
-    right = original[char].right_side_bearing
+    try:
+        char = g.glyphname
+        print(char)
+        # Gets original font bearings
+        left = original[char].left_side_bearing
+        right = original[char].right_side_bearing
 
-    # Sets current bearings to 0
-    font[char].left_side_bearing = 0
-    font[char].right_side_bearing = 0
+        # Sets current bearings to 0
+        font[char].left_side_bearing = 0
+        font[char].right_side_bearing = 0
 
-    # Gets drawing width
-    width = font[char].width
+        # Gets drawing width
+        width = font[char].width
 
-    # Resize the width with original bearings
-    font[char].width = left + width + right
-    font[char].left_side_bearing = left
-    font[char].right_side_bearing = right
+        # Resize the width with original bearings
+        font[char].width = left + width + right
+        font[char].left_side_bearing = left
+        font[char].right_side_bearing = right
+    except:
+        pass
 
 
 # EXPORT ORIGINAL FONT AS PFA/AFM TO GET OPENTYPE FEATURES FROM AN AFM FILE
