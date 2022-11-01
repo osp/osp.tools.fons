@@ -279,33 +279,38 @@ def createSpaceGlyphs(name, codepoint, value):
     font[name].width = value;
 
 def write_sfd(ofilename, fontname, image, glyphs, font_height, font_ascent):
-    font.ascent = font_ascent
-    font.descent = font_height - font_ascent
+    font_height = int(font_height)
+    font.ascent = int(font_ascent)
+    font.descent = font_height - int(font_ascent)
+    print("Generating SFD")
+
 
     for glyph in glyphs:
-        print glyph.name, glyph.box.r
-        process_glyph(image, glyph, font_height)
+        print(glyph.name, glyph.box.r)
+        process_glyph(image, glyph, int())
     
     font.selection.all()
-    font.autoWidth(100, 30) 
+    font.autoWidth(100, 30)
     font.autoHint()
 
+
     # CREATE SPACE CHARACTERS
-    createSpaceGlyphs('space', 32, font_height / 4)
-    createSpaceGlyphs('uni2000', 8192, font_height / 2) # en-quad
+    createSpaceGlyphs('space', 32, int(font_height / 4))
+    createSpaceGlyphs('uni2000', 8192, int(font_height / 2)) # en-quad
     createSpaceGlyphs('uni2001', 8193, font_height) # em-quad
-    createSpaceGlyphs('uni2002', 8194, font_height / 2) # en-space
+    createSpaceGlyphs('uni2002', 8194, int(font_height / 2)) # en-space
     createSpaceGlyphs('uni2003', 8195, font_height) # em-space
-    createSpaceGlyphs('uni2004', 8196, font_height / 3) # three per em space
-    createSpaceGlyphs('uni2005', 8197, font_height / 4) # four per em space
-    createSpaceGlyphs('uni2006', 8198, font_height / 6) # six per em space
-    #createSpaceGlyphs('uni2007', 8199, font['five'].width) # figure space
-    #createSpaceGlyphs('uni2008', 8200, font['period'].width) # punctuation space
-    createSpaceGlyphs('uni2009', 8201, font_height / 5) # thin space
-    createSpaceGlyphs('uni200A', 8202, font_height / 6) # hair space
+    createSpaceGlyphs('uni2004', 8196, int(font_height / 3)) # three per em space
+    createSpaceGlyphs('uni2005', 8197, int(font_height / 4)) # four per em space
+    createSpaceGlyphs('uni2006', 8198, int(font_height / 6)) # six per em space
+    #createSpaceGlyphs('uni2007', 8199, int(font['five'].width)) # figure space
+    #createSpaceGlyphs('uni2008', 8200, int(font['period'].width)) # punctuation space
+    createSpaceGlyphs('uni2009', 8201, int(font_height / 5)) # thin space
+    createSpaceGlyphs('uni200A', 8202, int(font_height / 6)) # hair space
     createSpaceGlyphs('uni200B', 8203, 0) # zero-width space
-    createSpaceGlyphs('uni202F', 8239, font_height / 5) # narrow no-break space
-    createSpaceGlyphs('uni205F', 8287, font_height / 18 * 4) # mathematical space
+    createSpaceGlyphs('uni202F', 8239, int(font_height / 5)) # narrow no-break space
+    createSpaceGlyphs('uni205F', 8287, int(font_height / 18 * 4)) # mathematical space
     createSpaceGlyphs('uniFEFF', 65279, 0) # zero width no-break space
 
+    print("save")
     font.save(ofilename)
