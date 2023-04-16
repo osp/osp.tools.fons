@@ -11,7 +11,7 @@ In 2011, Pierre Marchand made with his own hands, in the laboratory of OSP, a cr
 Besides being cool, Fonzie was able to make a typeface out of scanned letters.
 In his childhood, Fonzie asked for letters to behave well and to organize themselves. 
 They had to not hold hands and ordered themselves by the order of the Unicode.
-The [Univers Else](http://osp.kitchen/foundry/universelse/) family was born.
+The [Univers Else](http://osp.kitchen/foundry/univers-else/) family was born.
 In his teenage years, in 2013, Fonzie got more and more experienced. 
 He could decipher letters from a scanned page of a book by using OCR (Optical Character Recognition).
 Fonzie could then read nice stories. But Fonzie is so cool that he’s going even further.
